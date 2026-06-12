@@ -12,8 +12,8 @@ screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.Parent = player.PlayerGui
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 540, 0, 520)
-mainFrame.Position = UDim2.new(0.5, -270, 0.5, -260)
+mainFrame.Size = UDim2.new(0, 600, 0, 580)
+mainFrame.Position = UDim2.new(0.5, -300, 0.5, -290)
 mainFrame.BackgroundColor3 = Color3.fromRGB(14, 14, 18)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -133,7 +133,7 @@ listFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 listFrame.Parent = mainFrame
 
 local grid = Instance.new("UIGridLayout")
-grid.CellSize = UDim2.new(0.5, -6, 0, 90)
+grid.CellSize = UDim2.new(0.5, -6, 0, 120)  -- kartu lebih tinggi
 grid.CellPadding = UDim2.new(0, 10, 0, 10)
 grid.SortOrder = Enum.SortOrder.Name
 grid.Parent = listFrame
@@ -180,43 +180,43 @@ local function createCard(d)
     stroke.Parent = card
 
     local topBar = Instance.new("Frame")
-    topBar.Size = UDim2.new(1, 0, 0, 2)
+    topBar.Size = UDim2.new(1, 0, 0, 3)
     topBar.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
     topBar.BorderSizePixel = 0
     Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
     topBar.Parent = card
 
-    -- Text gede di tengah (ganti emoji)
+    -- Text gede banget di tengah
     local shortLabel = Instance.new("TextLabel")
-    shortLabel.Size = UDim2.new(1, 0, 0, 36)
-    shortLabel.Position = UDim2.new(0, 0, 0, 8)
+    shortLabel.Size = UDim2.new(1, 0, 0, 60)
+    shortLabel.Position = UDim2.new(0, 0, 0, 12)
     shortLabel.Text = d.short
     shortLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
-    shortLabel.TextTransparency = 0.2
+    shortLabel.TextTransparency = 0.15
     shortLabel.BackgroundTransparency = 1
     shortLabel.Font = Enum.Font.GothamBold
-    shortLabel.TextSize = 28
+    shortLabel.TextSize = 48  -- gede banget
     shortLabel.Parent = card
 
     local nameLabel = Instance.new("TextLabel")
-    nameLabel.Size = UDim2.new(1, -12, 0, 20)
-    nameLabel.Position = UDim2.new(0, 6, 0, 48)
+    nameLabel.Size = UDim2.new(1, -12, 0, 22)
+    nameLabel.Position = UDim2.new(0, 6, 0, 76)
     nameLabel.Text = d.name:upper()
     nameLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     nameLabel.BackgroundTransparency = 1
     nameLabel.Font = Enum.Font.GothamBold
-    nameLabel.TextSize = 13
+    nameLabel.TextSize = 15
     nameLabel.Parent = card
 
     local tierLabel = Instance.new("TextLabel")
     tierLabel.Size = UDim2.new(1, -12, 0, 16)
-    tierLabel.Position = UDim2.new(0, 6, 0, 68)
+    tierLabel.Position = UDim2.new(0, 6, 0, 98)
     tierLabel.Text = "MYTHICAL"
     tierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     tierLabel.TextTransparency = 0.5
     tierLabel.BackgroundTransparency = 1
     tierLabel.Font = Enum.Font.GothamBold
-    tierLabel.TextSize = 9
+    tierLabel.TextSize = 10
     tierLabel.Parent = card
 
     card.Parent = listFrame
