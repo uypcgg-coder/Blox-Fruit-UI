@@ -133,7 +133,7 @@ listFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 listFrame.Parent = mainFrame
 
 local grid = Instance.new("UIGridLayout")
-grid.CellSize = UDim2.new(0.5, -6, 0, 82)
+grid.CellSize = UDim2.new(0.5, -6, 0, 90)
 grid.CellPadding = UDim2.new(0, 10, 0, 10)
 grid.SortOrder = Enum.SortOrder.Name
 grid.Parent = listFrame
@@ -145,17 +145,17 @@ listPadding.Parent = listFrame
 
 -- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  icon = "🐆", key = "Leopard-Leopard"},
-    {name = "Dragon",   icon = "🐉", key = "Dragon-Dragon"},
-    {name = "Kitsune",  icon = "🦊", key = "Kitsune-Kitsune"},
-    {name = "Dough",    icon = "🌀", key = "Dough-Dough"},
-    {name = "T-Rex",    icon = "🦖", key = "T-Rex-T-Rex"},
-    {name = "Spirit",   icon = "👻", key = "Spirit-Spirit"},
-    {name = "Venom",    icon = "☠️", key = "Venom-Venom"},
-    {name = "Control",  icon = "⚡", key = "Control-Control"},
-    {name = "Shadow",   icon = "🌑", key = "Shadow-Shadow"},
-    {name = "Gas",      icon = "💨", key = "Gas-Gas"},
-    {name = "Mammoth",  icon = "🦣", key = "Mammoth-Mammoth"},
+    {name = "Leopard",  short = "LEO",  key = "Leopard-Leopard"},
+    {name = "Dragon",   short = "DRG",  key = "Dragon-Dragon"},
+    {name = "Kitsune",  short = "KIT",  key = "Kitsune-Kitsune"},
+    {name = "Dough",    short = "DGH",  key = "Dough-Dough"},
+    {name = "T-Rex",    short = "TRX",  key = "T-Rex-T-Rex"},
+    {name = "Spirit",   short = "SPR",  key = "Spirit-Spirit"},
+    {name = "Venom",    short = "VNM",  key = "Venom-Venom"},
+    {name = "Control",  short = "CTR",  key = "Control-Control"},
+    {name = "Shadow",   short = "SHD",  key = "Shadow-Shadow"},
+    {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
+    {name = "Mammoth",  short = "MMT",  key = "Mammoth-Mammoth"},
 }
 
 local mythicalSet = {}
@@ -163,7 +163,7 @@ for _, d in ipairs(mythicalData) do
     mythicalSet[d.key] = d
 end
 
--- ===== BUAT SEMUA KARTU DULUAN, HIDDEN =====
+-- ===== BUAT SEMUA KARTU, HIDDEN =====
 local cardRefs = {}
 
 local function createCard(d)
@@ -171,7 +171,7 @@ local function createCard(d)
     card.Name = d.key
     card.BackgroundColor3 = Color3.fromRGB(26, 24, 0)
     card.BorderSizePixel = 0
-    card.Visible = false -- sembunyiin dulu
+    card.Visible = false
     Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
 
     local stroke = Instance.new("UIStroke")
@@ -186,18 +186,21 @@ local function createCard(d)
     Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
     topBar.Parent = card
 
-    local iconLabel = Instance.new("TextLabel")
-    iconLabel.Size = UDim2.new(1, 0, 0, 32)
-    iconLabel.Position = UDim2.new(0, 0, 0, 10)
-    iconLabel.Text = d.icon
-    iconLabel.BackgroundTransparency = 1
-    iconLabel.Font = Enum.Font.Gotham
-    iconLabel.TextSize = 24
-    iconLabel.Parent = card
+    -- Text gede di tengah (ganti emoji)
+    local shortLabel = Instance.new("TextLabel")
+    shortLabel.Size = UDim2.new(1, 0, 0, 36)
+    shortLabel.Position = UDim2.new(0, 0, 0, 8)
+    shortLabel.Text = d.short
+    shortLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+    shortLabel.TextTransparency = 0.2
+    shortLabel.BackgroundTransparency = 1
+    shortLabel.Font = Enum.Font.GothamBold
+    shortLabel.TextSize = 28
+    shortLabel.Parent = card
 
     local nameLabel = Instance.new("TextLabel")
     nameLabel.Size = UDim2.new(1, -12, 0, 20)
-    nameLabel.Position = UDim2.new(0, 6, 0, 44)
+    nameLabel.Position = UDim2.new(0, 6, 0, 48)
     nameLabel.Text = d.name:upper()
     nameLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     nameLabel.BackgroundTransparency = 1
@@ -207,7 +210,7 @@ local function createCard(d)
 
     local tierLabel = Instance.new("TextLabel")
     tierLabel.Size = UDim2.new(1, -12, 0, 16)
-    tierLabel.Position = UDim2.new(0, 6, 0, 62)
+    tierLabel.Position = UDim2.new(0, 6, 0, 68)
     tierLabel.Text = "MYTHICAL"
     tierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     tierLabel.TextTransparency = 0.5
@@ -220,14 +223,12 @@ local function createCard(d)
     cardRefs[d.key] = card
 end
 
--- Bikin semua kartu sekarang, tapi hidden
 for _, d in ipairs(mythicalData) do
     createCard(d)
 end
 
 -- ===== UPDATE UI =====
 local function updateUI(data)
-    -- Reset semua hidden dulu
     for _, card in pairs(cardRefs) do
         card.Visible = false
     end
