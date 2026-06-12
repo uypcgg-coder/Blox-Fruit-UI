@@ -12,8 +12,8 @@ screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.Parent = player.PlayerGui
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 560, 0, 540)
-mainFrame.Position = UDim2.new(0.5, -280, 0.5, -270)
+mainFrame.Size = UDim2.new(0, 600, 0, 580)
+mainFrame.Position = UDim2.new(0.5, -300, 0.5, -290)
 mainFrame.BackgroundColor3 = Color3.fromRGB(14, 14, 18)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -133,8 +133,8 @@ listFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 listFrame.Parent = mainFrame
 
 local grid = Instance.new("UIGridLayout")
-grid.CellSize = UDim2.new(1, -6, 0, 52)
-grid.CellPadding = UDim2.new(0, 0, 0, 6)
+grid.CellSize = UDim2.new(0.5, -6, 0, 120)  -- kartu lebih tinggi
+grid.CellPadding = UDim2.new(0, 10, 0, 10)
 grid.SortOrder = Enum.SortOrder.Name
 grid.Parent = listFrame
 
@@ -143,18 +143,19 @@ listPadding.PaddingTop = UDim.new(0, 8)
 listPadding.PaddingBottom = UDim.new(0, 8)
 listPadding.Parent = listFrame
 
+-- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  key = "Leopard-Leopard"},
-    {name = "Dragon",   key = "Dragon-Dragon"},
-    {name = "Kitsune",  key = "Kitsune-Kitsune"},
-    {name = "Dough",    key = "Dough-Dough"},
-    {name = "T-Rex",    key = "T-Rex-T-Rex"},
-    {name = "Spirit",   key = "Spirit-Spirit"},
-    {name = "Venom",    key = "Venom-Venom"},
-    {name = "Control",  key = "Control-Control"},
-    {name = "Shadow",   key = "Shadow-Shadow"},
-    {name = "Gas",      key = "Gas-Gas"},
-    {name = "Mammoth",  key = "Mammoth-Mammoth"},
+    {name = "Leopard",  short = "LEO",  key = "Leopard-Leopard"},
+    {name = "Dragon",   short = "DRG",  key = "Dragon-Dragon"},
+    {name = "Kitsune",  short = "KIT",  key = "Kitsune-Kitsune"},
+    {name = "Dough",    short = "DGH",  key = "Dough-Dough"},
+    {name = "T-Rex",    short = "TRX",  key = "T-Rex-T-Rex"},
+    {name = "Spirit",   short = "SPR",  key = "Spirit-Spirit"},
+    {name = "Venom",    short = "VNM",  key = "Venom-Venom"},
+    {name = "Control",  short = "CTR",  key = "Control-Control"},
+    {name = "Shadow",   short = "SHD",  key = "Shadow-Shadow"},
+    {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
+    {name = "Mammoth",  short = "MMT",  key = "Mammoth-Mammoth"},
 }
 
 local mythicalSet = {}
@@ -162,6 +163,7 @@ for _, d in ipairs(mythicalData) do
     mythicalSet[d.key] = d
 end
 
+-- ===== BUAT SEMUA KARTU, HIDDEN =====
 local cardRefs = {}
 
 local function createCard(d)
@@ -170,7 +172,7 @@ local function createCard(d)
     card.BackgroundColor3 = Color3.fromRGB(26, 24, 0)
     card.BorderSizePixel = 0
     card.Visible = false
-    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
 
     local stroke = Instance.new("UIStroke")
     stroke.Color = Color3.fromRGB(255, 215, 0)
@@ -178,34 +180,43 @@ local function createCard(d)
     stroke.Parent = card
 
     local topBar = Instance.new("Frame")
-    topBar.Size = UDim2.new(1, 0, 0, 2)
+    topBar.Size = UDim2.new(1, 0, 0, 3)
     topBar.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
     topBar.BorderSizePixel = 0
-    Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 8)
+    Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
     topBar.Parent = card
 
-    local mainText = Instance.new("TextLabel")
-    mainText.Size = UDim2.new(1, -20, 0, 28)
-    mainText.Position = UDim2.new(0, 14, 0, 6)
-    mainText.Text = d.name:upper()
-    mainText.TextColor3 = Color3.fromRGB(255, 215, 0)
-    mainText.TextTransparency = 0.1
-    mainText.BackgroundTransparency = 1
-    mainText.Font = Enum.Font.GothamBold
-    mainText.TextSize = 20
-    mainText.TextXAlignment = Enum.TextXAlignment.Left
-    mainText.Parent = card
+    -- Text gede banget di tengah
+    local shortLabel = Instance.new("TextLabel")
+    shortLabel.Size = UDim2.new(1, 0, 0, 60)
+    shortLabel.Position = UDim2.new(0, 0, 0, 12)
+    shortLabel.Text = d.short
+    shortLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+    shortLabel.TextTransparency = 0.15
+    shortLabel.BackgroundTransparency = 1
+    shortLabel.Font = Enum.Font.GothamBold
+    shortLabel.TextSize = 80  -- gede banget
+    shortLabel.Parent = card
+
+    local nameLabel = Instance.new("TextLabel")
+    nameLabel.Size = UDim2.new(1, -12, 0, 22)
+    nameLabel.Position = UDim2.new(0, 6, 0, 76)
+    nameLabel.Text = d.name:upper()
+    nameLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+    nameLabel.BackgroundTransparency = 1
+    nameLabel.Font = Enum.Font.GothamBold
+    nameLabel.TextSize = 15
+    nameLabel.Parent = card
 
     local tierLabel = Instance.new("TextLabel")
-    tierLabel.Size = UDim2.new(1, -20, 0, 14)
-    tierLabel.Position = UDim2.new(0, 14, 0, 34)
+    tierLabel.Size = UDim2.new(1, -12, 0, 16)
+    tierLabel.Position = UDim2.new(0, 6, 0, 98)
     tierLabel.Text = "MYTHICAL"
     tierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     tierLabel.TextTransparency = 0.5
     tierLabel.BackgroundTransparency = 1
     tierLabel.Font = Enum.Font.GothamBold
-    tierLabel.TextSize = 9
-    tierLabel.TextXAlignment = Enum.TextXAlignment.Left
+    tierLabel.TextSize = 10
     tierLabel.Parent = card
 
     card.Parent = listFrame
@@ -216,6 +227,7 @@ for _, d in ipairs(mythicalData) do
     createCard(d)
 end
 
+-- ===== UPDATE UI =====
 local function updateUI(data)
     for _, card in pairs(cardRefs) do
         card.Visible = false
@@ -234,6 +246,7 @@ local function updateUI(data)
     countBadge.Text = "FOUND: " .. foundCount .. " / 11"
 end
 
+-- ===== HOOK =====
 local mt = getrawmetatable(game)
 local oldNamecall = mt.__namecall
 setreadonly(mt, false)
