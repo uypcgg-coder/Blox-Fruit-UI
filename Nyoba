@@ -1,0 +1,287 @@
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+
+-- Cleanup GUI lama
+if player.PlayerGui:FindFirstChild("MythicalViewer") then
+    player.PlayerGui.MythicalViewer:Destroy()
+end
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "MythicalViewer"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = player.PlayerGui
+
+-- ===== MAIN FRAME =====
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 540, 0, 520)
+mainFrame.Position = UDim2.new(0.5, -270, 0.5, -260)
+mainFrame.BackgroundColor3 = Color3.fromRGB(14, 14, 18)
+mainFrame.BorderSizePixel = 0
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 14)
+
+local outerStroke = Instance.new("UIStroke")
+outerStroke.Color = Color3.fromRGB(42, 42, 56)
+outerStroke.Thickness = 1
+outerStroke.Parent = mainFrame
+
+-- ===== HEADER =====
+local header = Instance.new("Frame")
+header.Size = UDim2.new(1, 0, 0, 54)
+header.BackgroundColor3 = Color3.fromRGB(19, 19, 26)
+header.BorderSizePixel = 0
+header.Parent = mainFrame
+
+Instance.new("UICorner", header).CornerRadius = UDim.new(0, 14)
+
+-- Bikin pojok bawah header rata
+local headerFix = Instance.new("Frame")
+headerFix.Size = UDim2.new(1, 0, 0, 14)
+headerFix.Position = UDim2.new(0, 0, 1, -14)
+headerFix.BackgroundColor3 = Color3.fromRGB(19, 19, 26)
+headerFix.BorderSizePixel = 0
+headerFix.Parent = header
+
+local headerDivider = Instance.new("Frame")
+headerDivider.Size = UDim2.new(1, 0, 0, 1)
+headerDivider.Position = UDim2.new(0, 0, 1, -1)
+headerDivider.BackgroundColor3 = Color3.fromRGB(42, 42, 56)
+headerDivider.BorderSizePixel = 0
+headerDivider.Parent = header
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(0, 300, 1, 0)
+titleLabel.Position = UDim2.new(0, 20, 0, 0)
+titleLabel.Text = "✦  MYTHICAL VIEWER"
+titleLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 16
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.Parent = header
+
+local countBadge = Instance.new("TextLabel")
+countBadge.Name = "CountBadge"
+countBadge.Size = UDim2.new(0, 110, 0, 28)
+countBadge.Position = UDim2.new(1, -130, 0.5, -14)
+countBadge.Text = "FOUND: 0 / 11"
+countBadge.TextColor3 = Color3.fromRGB(255, 215, 0)
+countBadge.BackgroundColor3 = Color3.fromRGB(30, 30, 42)
+countBadge.Font = Enum.Font.GothamBold
+countBadge.TextSize = 11
+Instance.new("UICorner", countBadge).CornerRadius = UDim.new(0, 6)
+Instance.new("UIStroke", countBadge).Color = Color3.fromRGB(58, 58, 80)
+countBadge.Parent = header
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 28, 0, 28)
+closeBtn.Position = UDim2.new(1, -20, 0.5, -14)
+closeBtn.Text = "✕"
+closeBtn.TextColor3 = Color3.fromRGB(120, 120, 130)
+closeBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 12
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 6)
+closeBtn.Parent = header
+closeBtn.MouseButton1Click:Connect(function() mainFrame.Visible = false end)
+
+-- ===== FOOTER / STATUS BAR =====
+local footer = Instance.new("Frame")
+footer.Size = UDim2.new(1, 0, 0, 36)
+footer.Position = UDim2.new(0, 0, 1, -36)
+footer.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
+footer.BorderSizePixel = 0
+footer.Parent = mainFrame
+
+Instance.new("UICorner", footer).CornerRadius = UDim.new(0, 14)
+
+local footerFix = Instance.new("Frame")
+footerFix.Size = UDim2.new(1, 0, 0, 14)
+footerFix.BackgroundColor3 = Color3.fromRGB(12, 12, 18)
+footerFix.BorderSizePixel = 0
+footerFix.Parent = footer
+
+local footerDivider = Instance.new("Frame")
+footerDivider.Size = UDim2.new(1, 0, 0, 1)
+footerDivider.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+footerDivider.BorderSizePixel = 0
+footerDivider.Parent = footer
+
+local statusDot = Instance.new("Frame")
+statusDot.Size = UDim2.new(0, 7, 0, 7)
+statusDot.Position = UDim2.new(0, 16, 0.5, -3)
+statusDot.BackgroundColor3 = Color3.fromRGB(85, 170, 85)
+statusDot.BorderSizePixel = 0
+Instance.new("UICorner", statusDot).CornerRadius = UDim.new(1, 0)
+statusDot.Parent = footer
+
+local statusLabel = Instance.new("TextLabel")
+statusLabel.Size = UDim2.new(1, -30, 1, 0)
+statusLabel.Position = UDim2.new(0, 30, 0, 0)
+statusLabel.Text = "HOOK ACTIVE  ·  OPEN INVENTORY TO SCAN"
+statusLabel.TextColor3 = Color3.fromRGB(85, 170, 85)
+statusLabel.BackgroundTransparency = 1
+statusLabel.Font = Enum.Font.GothamBold
+statusLabel.TextSize = 10
+statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+statusLabel.Parent = footer
+
+-- ===== SCROLL LIST =====
+local listFrame = Instance.new("ScrollingFrame")
+listFrame.Size = UDim2.new(1, -24, 1, -100)
+listFrame.Position = UDim2.new(0, 12, 0, 60)
+listFrame.BackgroundTransparency = 1
+listFrame.BorderSizePixel = 0
+listFrame.ScrollBarThickness = 3
+listFrame.ScrollBarImageColor3 = Color3.fromRGB(42, 42, 56)
+listFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+listFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+listFrame.Parent = mainFrame
+
+local grid = Instance.new("UIGridLayout")
+grid.CellSize = UDim2.new(0.5, -6, 0, 82)
+grid.CellPadding = UDim2.new(0, 10, 0, 10)
+grid.SortOrder = Enum.SortOrder.Name
+grid.Parent = listFrame
+
+local listPadding = Instance.new("UIPadding")
+listPadding.PaddingTop = UDim.new(0, 8)
+listPadding.PaddingBottom = UDim.new(0, 8)
+listPadding.Parent = listFrame
+
+-- ===== MYTHICAL DATA =====
+local mythicalData = {
+    {name = "Leopard",  icon = "🐆", key = "Leopard-Leopard"},
+    {name = "Dragon",   icon = "🐉", key = "Dragon-Dragon"},
+    {name = "Kitsune",  icon = "🦊", key = "Kitsune-Kitsune"},
+    {name = "Dough",    icon = "🌀", key = "Dough-Dough"},
+    {name = "T-Rex",    icon = "🦖", key = "T-Rex-T-Rex"},
+    {name = "Spirit",   icon = "👻", key = "Spirit-Spirit"},
+    {name = "Venom",    icon = "☠️", key = "Venom-Venom"},
+    {name = "Control",  icon = "⚡", key = "Control-Control"},
+    {name = "Shadow",   icon = "🌑", key = "Shadow-Shadow"},
+    {name = "Gas",      icon = "💨", key = "Gas-Gas"},
+    {name = "Mammoth",  icon = "🦣", key = "Mammoth-Mammoth"},
+}
+
+local mythicalSet = {}
+for _, d in ipairs(mythicalData) do
+    mythicalSet[d.key] = d
+end
+
+local cardRefs = {}
+
+-- ===== BUAT KARTU =====
+local function createCard(data)
+    local card = Instance.new("Frame")
+    card.Name = data.key
+    card.BackgroundColor3 = Color3.fromRGB(20, 20, 32)
+    card.BorderSizePixel = 0
+    Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
+
+    local stroke = Instance.new("UIStroke")
+    stroke.Color = Color3.fromRGB(37, 37, 53)
+    stroke.Thickness = 1
+    stroke.Parent = card
+
+    -- Gold top accent bar (hidden by default)
+    local topBar = Instance.new("Frame")
+    topBar.Name = "TopBar"
+    topBar.Size = UDim2.new(1, 0, 0, 2)
+    topBar.BackgroundColor3 = Color3.fromRGB(255, 215, 0)
+    topBar.BorderSizePixel = 0
+    topBar.Visible = false
+    Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
+    topBar.Parent = card
+
+    local iconLabel = Instance.new("TextLabel")
+    iconLabel.Size = UDim2.new(1, 0, 0, 32)
+    iconLabel.Position = UDim2.new(0, 0, 0, 10)
+    iconLabel.Text = data.icon
+    iconLabel.BackgroundTransparency = 1
+    iconLabel.Font = Enum.Font.Gotham
+    iconLabel.TextSize = 24
+    iconLabel.Parent = card
+
+    local nameLabel = Instance.new("TextLabel")
+    nameLabel.Size = UDim2.new(1, -12, 0, 20)
+    nameLabel.Position = UDim2.new(0, 6, 0, 44)
+    nameLabel.Text = data.name:upper()
+    nameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+    nameLabel.BackgroundTransparency = 1
+    nameLabel.Font = Enum.Font.GothamBold
+    nameLabel.TextSize = 13
+    nameLabel.Parent = card
+
+    local tierLabel = Instance.new("TextLabel")
+    tierLabel.Size = UDim2.new(1, -12, 0, 16)
+    tierLabel.Position = UDim2.new(0, 6, 0, 62)
+    tierLabel.Text = "MYTHICAL"
+    tierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+    tierLabel.TextTransparency = 0.5
+    tierLabel.BackgroundTransparency = 1
+    tierLabel.Font = Enum.Font.GothamBold
+    tierLabel.TextSize = 9
+    tierLabel.Parent = card
+
+    card.Parent = listFrame
+    cardRefs[data.key] = {card = card, stroke = stroke, topBar = topBar, nameLabel = nameLabel}
+end
+
+for _, d in ipairs(mythicalData) do
+    createCard(d)
+end
+
+-- ===== UPDATE UI =====
+local function updateUI(data)
+    local foundCount = 0
+    -- Reset semua dulu
+    for key, ref in pairs(cardRefs) do
+        ref.card.BackgroundColor3 = Color3.fromRGB(20, 20, 32)
+        ref.stroke.Color = Color3.fromRGB(37, 37, 53)
+        ref.topBar.Visible = false
+        ref.nameLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+    end
+
+    for _, itemData in pairs(data) do
+        local name = itemData.Name or tostring(itemData)
+        if mythicalSet[name] then
+            local ref = cardRefs[name]
+            if ref then
+                foundCount += 1
+                ref.card.BackgroundColor3 = Color3.fromRGB(26, 24, 0)
+                ref.stroke.Color = Color3.fromRGB(255, 215, 0)
+                ref.topBar.Visible = true
+                ref.nameLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+            end
+        end
+    end
+
+    countBadge.Text = "FOUND: " .. foundCount .. " / 11"
+end
+
+-- ===== HOOK =====
+local mt = getrawmetatable(game)
+local oldNamecall = mt.__namecall
+setreadonly(mt, false)
+
+mt.__namecall = newcclosure(function(self, ...)
+    local args = {...}
+    if getnamecallmethod() == "InvokeServer"
+        and self.Name == "CommF_"
+        and args[1] == "getInventory" then
+        local data = oldNamecall(self, ...)
+        updateUI(data)
+        return data
+    end
+    return oldNamecall(self, ...)
+end)
+
+setreadonly(mt, true)
+
+print("[MythicalViewer] UI aktif — buka inventory lu sekarang!")
