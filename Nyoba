@@ -8,12 +8,13 @@ end
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "MythicalViewer"
 screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = UDim2.new and Enum.ZIndexBehavior.Sibling
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.Parent = player.PlayerGui
 
 local mainFrame = Instance.new("Frame")
-mainFrame.Size = UDim2.new(0, 600, 0, 580)
-mainFrame.Position = UDim2.new(0.5, -300, 0.5, -290)
+mainFrame.Size = UDim2.new(0, 560, 0, 540)
+mainFrame.Position = UDim2.new(0.5, -280, 0.5, -270)
 mainFrame.BackgroundColor3 = Color3.fromRGB(14, 14, 18)
 mainFrame.BorderSizePixel = 0
 mainFrame.Active = true
@@ -132,10 +133,10 @@ listFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 listFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 listFrame.Parent = mainFrame
 
--- 1 kolom full width, kartu gede
+-- 1 kolom, tinggi kartu 68px = muat ~6 buah di layar
 local grid = Instance.new("UIGridLayout")
-grid.CellSize = UDim2.new(1, -6, 0, 140)
-grid.CellPadding = UDim2.new(0, 0, 0, 10)
+grid.CellSize = UDim2.new(1, -6, 0, 68)
+grid.CellPadding = UDim2.new(0, 0, 0, 8)
 grid.SortOrder = Enum.SortOrder.Name
 grid.Parent = listFrame
 
@@ -146,17 +147,17 @@ listPadding.Parent = listFrame
 
 -- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  short = "LEOPARD",  key = "Leopard-Leopard"},
-    {name = "Dragon",   short = "DRAGON",   key = "Dragon-Dragon"},
-    {name = "Kitsune",  short = "KITSUNE",  key = "Kitsune-Kitsune"},
-    {name = "Dough",    short = "DOUGH",    key = "Dough-Dough"},
-    {name = "T-Rex",    short = "T-REX",    key = "T-Rex-T-Rex"},
-    {name = "Spirit",   short = "SPIRIT",   key = "Spirit-Spirit"},
-    {name = "Venom",    short = "VENOM",    key = "Venom-Venom"},
-    {name = "Control",  short = "CONTROL",  key = "Control-Control"},
-    {name = "Shadow",   short = "SHADOW",   key = "Shadow-Shadow"},
-    {name = "Gas",      short = "GAS",      key = "Gas-Gas"},
-    {name = "Mammoth",  short = "MAMMOTH",  key = "Mammoth-Mammoth"},
+    {name = "Leopard",  key = "Leopard-Leopard"},
+    {name = "Dragon",   key = "Dragon-Dragon"},
+    {name = "Kitsune",  key = "Kitsune-Kitsune"},
+    {name = "Dough",    key = "Dough-Dough"},
+    {name = "T-Rex",    key = "T-Rex-T-Rex"},
+    {name = "Spirit",   key = "Spirit-Spirit"},
+    {name = "Venom",    key = "Venom-Venom"},
+    {name = "Control",  key = "Control-Control"},
+    {name = "Shadow",   key = "Shadow-Shadow"},
+    {name = "Gas",      key = "Gas-Gas"},
+    {name = "Mammoth",  key = "Mammoth-Mammoth"},
 }
 
 local mythicalSet = {}
@@ -186,28 +187,27 @@ local function createCard(d)
     Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
     topBar.Parent = card
 
-    -- Nama gede banget di tengah kartu
     local mainText = Instance.new("TextLabel")
-    mainText.Size = UDim2.new(1, -20, 0, 80)
-    mainText.Position = UDim2.new(0, 10, 0, 15)
-    mainText.Text = d.short
+    mainText.Size = UDim2.new(1, -20, 0, 40)
+    mainText.Position = UDim2.new(0, 14, 0, 10)
+    mainText.Text = d.name:upper()
     mainText.TextColor3 = Color3.fromRGB(255, 215, 0)
     mainText.TextTransparency = 0.1
     mainText.BackgroundTransparency = 1
     mainText.Font = Enum.Font.GothamBold
-    mainText.TextSize = 58
+    mainText.TextSize = 28
     mainText.TextXAlignment = Enum.TextXAlignment.Left
     mainText.Parent = card
 
     local tierLabel = Instance.new("TextLabel")
-    tierLabel.Size = UDim2.new(1, -20, 0, 20)
-    tierLabel.Position = UDim2.new(0, 12, 0, 108)
+    tierLabel.Size = UDim2.new(1, -20, 0, 16)
+    tierLabel.Position = UDim2.new(0, 14, 0, 48)
     tierLabel.Text = "MYTHICAL"
     tierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     tierLabel.TextTransparency = 0.5
     tierLabel.BackgroundTransparency = 1
     tierLabel.Font = Enum.Font.GothamBold
-    tierLabel.TextSize = 11
+    tierLabel.TextSize = 10
     tierLabel.TextXAlignment = Enum.TextXAlignment.Left
     tierLabel.Parent = card
 
