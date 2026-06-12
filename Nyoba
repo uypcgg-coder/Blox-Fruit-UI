@@ -163,12 +163,15 @@ for _, d in ipairs(mythicalData) do
     mythicalSet[d.key] = d
 end
 
--- ===== CREATE CARD =====
+-- ===== BUAT SEMUA KARTU DULUAN, HIDDEN =====
+local cardRefs = {}
+
 local function createCard(d)
     local card = Instance.new("Frame")
     card.Name = d.key
     card.BackgroundColor3 = Color3.fromRGB(26, 24, 0)
     card.BorderSizePixel = 0
+    card.Visible = false -- sembunyiin dulu
     Instance.new("UICorner", card).CornerRadius = UDim.new(0, 10)
 
     local stroke = Instance.new("UIStroke")
@@ -214,37 +217,28 @@ local function createCard(d)
     tierLabel.Parent = card
 
     card.Parent = listFrame
+    cardRefs[d.key] = card
 end
 
--- ===== UPDATE UI (hanya tampil yang ditemukan) =====
+-- Bikin semua kartu sekarang, tapi hidden
+for _, d in ipairs(mythicalData) do
+    createCard(d)
+end
+
+-- ===== UPDATE UI =====
 local function updateUI(data)
-    for _, child in ipairs(listFrame:GetChildren()) do
-        if child:IsA("Frame") then child:Destroy() end
+    -- Reset semua hidden dulu
+    for _, card in pairs(cardRefs) do
+        card.Visible = false
     end
 
     local foundCount = 0
-    local foundList = {}
 
     for _, itemData in pairs(data) do
         local name = itemData.Name or tostring(itemData)
-        if mythicalSet[name] then
+        if mythicalSet[name] and cardRefs[name] then
+            cardRefs[name].Visible = true
             foundCount += 1
-            table.insert(foundList, mythicalSet[name])
-        end
-    end
-
-    if foundCount == 0 then
-        local emptyLabel = Instance.new("TextLabel")
-        emptyLabel.Size = UDim2.new(1, 0, 0, 60)
-        emptyLabel.Text = "No mythical found in inventory"
-        emptyLabel.TextColor3 = Color3.fromRGB(80, 80, 90)
-        emptyLabel.BackgroundTransparency = 1
-        emptyLabel.Font = Enum.Font.GothamBold
-        emptyLabel.TextSize = 12
-        emptyLabel.Parent = listFrame
-    else
-        for _, d in ipairs(foundList) do
-            createCard(d)
         end
     end
 
