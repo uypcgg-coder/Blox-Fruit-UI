@@ -132,9 +132,10 @@ listFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 listFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 listFrame.Parent = mainFrame
 
+-- 1 kolom full width, kartu gede
 local grid = Instance.new("UIGridLayout")
-grid.CellSize = UDim2.new(0.5, -6, 0, 120)  -- kartu lebih tinggi
-grid.CellPadding = UDim2.new(0, 10, 0, 10)
+grid.CellSize = UDim2.new(1, -6, 0, 140)
+grid.CellPadding = UDim2.new(0, 0, 0, 10)
 grid.SortOrder = Enum.SortOrder.Name
 grid.Parent = listFrame
 
@@ -145,17 +146,17 @@ listPadding.Parent = listFrame
 
 -- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  short = "LEO",  key = "Leopard-Leopard"},
-    {name = "Dragon",   short = "DRG",  key = "Dragon-Dragon"},
-    {name = "Kitsune",  short = "KIT",  key = "Kitsune-Kitsune"},
-    {name = "Dough",    short = "DGH",  key = "Dough-Dough"},
-    {name = "T-Rex",    short = "TRX",  key = "T-Rex-T-Rex"},
-    {name = "Spirit",   short = "SPR",  key = "Spirit-Spirit"},
-    {name = "Venom",    short = "VNM",  key = "Venom-Venom"},
-    {name = "Control",  short = "CTR",  key = "Control-Control"},
-    {name = "Shadow",   short = "SHD",  key = "Shadow-Shadow"},
-    {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
-    {name = "Mammoth",  short = "MMT",  key = "Mammoth-Mammoth"},
+    {name = "Leopard",  short = "LEOPARD",  key = "Leopard-Leopard"},
+    {name = "Dragon",   short = "DRAGON",   key = "Dragon-Dragon"},
+    {name = "Kitsune",  short = "KITSUNE",  key = "Kitsune-Kitsune"},
+    {name = "Dough",    short = "DOUGH",    key = "Dough-Dough"},
+    {name = "T-Rex",    short = "T-REX",    key = "T-Rex-T-Rex"},
+    {name = "Spirit",   short = "SPIRIT",   key = "Spirit-Spirit"},
+    {name = "Venom",    short = "VENOM",    key = "Venom-Venom"},
+    {name = "Control",  short = "CONTROL",  key = "Control-Control"},
+    {name = "Shadow",   short = "SHADOW",   key = "Shadow-Shadow"},
+    {name = "Gas",      short = "GAS",      key = "Gas-Gas"},
+    {name = "Mammoth",  short = "MAMMOTH",  key = "Mammoth-Mammoth"},
 }
 
 local mythicalSet = {}
@@ -163,7 +164,6 @@ for _, d in ipairs(mythicalData) do
     mythicalSet[d.key] = d
 end
 
--- ===== BUAT SEMUA KARTU, HIDDEN =====
 local cardRefs = {}
 
 local function createCard(d)
@@ -186,37 +186,29 @@ local function createCard(d)
     Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
     topBar.Parent = card
 
-    -- Text gede banget di tengah
-    local shortLabel = Instance.new("TextLabel")
-    shortLabel.Size = UDim2.new(1, 0, 0, 60)
-    shortLabel.Position = UDim2.new(0, 0, 0, 12)
-    shortLabel.Text = d.short
-    shortLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
-    shortLabel.TextTransparency = 0.15
-    shortLabel.BackgroundTransparency = 1
-    shortLabel.Font = Enum.Font.GothamBold
-    shortLabel.TextSize = 48  -- gede banget
-    shortLabel.Parent = card
-
-    local nameLabel = Instance.new("TextLabel")
-    nameLabel.Size = UDim2.new(1, -12, 0, 22)
-    nameLabel.Position = UDim2.new(0, 6, 0, 76)
-    nameLabel.Text = d.name:upper()
-    nameLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
-    nameLabel.BackgroundTransparency = 1
-    nameLabel.Font = Enum.Font.GothamBold
-    nameLabel.TextSize = 15
-    nameLabel.Parent = card
+    -- Nama gede banget di tengah kartu
+    local mainText = Instance.new("TextLabel")
+    mainText.Size = UDim2.new(1, -20, 0, 80)
+    mainText.Position = UDim2.new(0, 10, 0, 15)
+    mainText.Text = d.short
+    mainText.TextColor3 = Color3.fromRGB(255, 215, 0)
+    mainText.TextTransparency = 0.1
+    mainText.BackgroundTransparency = 1
+    mainText.Font = Enum.Font.GothamBold
+    mainText.TextSize = 58
+    mainText.TextXAlignment = Enum.TextXAlignment.Left
+    mainText.Parent = card
 
     local tierLabel = Instance.new("TextLabel")
-    tierLabel.Size = UDim2.new(1, -12, 0, 16)
-    tierLabel.Position = UDim2.new(0, 6, 0, 98)
+    tierLabel.Size = UDim2.new(1, -20, 0, 20)
+    tierLabel.Position = UDim2.new(0, 12, 0, 108)
     tierLabel.Text = "MYTHICAL"
     tierLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
     tierLabel.TextTransparency = 0.5
     tierLabel.BackgroundTransparency = 1
     tierLabel.Font = Enum.Font.GothamBold
-    tierLabel.TextSize = 10
+    tierLabel.TextSize = 11
+    tierLabel.TextXAlignment = Enum.TextXAlignment.Left
     tierLabel.Parent = card
 
     card.Parent = listFrame
