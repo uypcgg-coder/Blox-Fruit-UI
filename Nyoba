@@ -266,3 +266,76 @@ end)
 setreadonly(mt, true)
 
 print("[MythicalViewer] UI aktif — buka inventory lu sekarang!")
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local dataFolder = LocalPlayer:WaitForChild("Data", 15)
+
+local function formatAngka(n)
+    n = tonumber(n)
+    if n >= 1000000000 then
+        return string.format("%.1fb", n / 1000000000)
+    elseif n >= 1000000 then
+        return string.format("%.1fm", n / 1000000)
+    elseif n >= 1000 then
+        return string.format("%.1fk", n / 1000)
+    else
+        return tostring(n)
+    end
+end
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.ResetOnSpawn = false
+screenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+-- LEVEL
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(0, 400, 0, 120)
+label.Position = UDim2.new(1, -1250, 0, 20)
+label.BackgroundTransparency = 0.3
+label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+label.Text = "⚔️ Level: ..."
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.GothamBold
+label.TextSize = 64
+label.Parent = screenGui
+Instance.new("UICorner", label).CornerRadius = UDim.new(0, 12)
+
+-- BELI
+local beliLabel = Instance.new("TextLabel")
+beliLabel.Size = UDim2.new(0, 400, 0, 120)
+beliLabel.Position = UDim2.new(1, -1250, 0, 150)
+beliLabel.BackgroundTransparency = 0.3
+beliLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+beliLabel.Text = "💰 Beli: ..."
+beliLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+beliLabel.Font = Enum.Font.GothamBold
+beliLabel.TextSize = 64
+beliLabel.Parent = screenGui
+Instance.new("UICorner", beliLabel).CornerRadius = UDim.new(0, 12)
+
+task.spawn(function()
+    while task.wait(1) do
+        if dataFolder then
+            local lvl = dataFolder:FindFirstChild("Level")
+            if lvl then
+                label.Text = "⚔️ Level: " .. tostring(lvl.Value)
+            end
+            local beli = dataFolder:FindFirstChild("Beli")
+            if beli then
+                beliLabel.Text = "💰 Beli: " .. formatAngka(beli.Value)
+            end
+        end
+    end
+end)
+
+local StarterGui = game:GetService("StarterGui")
+
+-- Langsung matikan UI
+pcall(function()
+    StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false)
+    StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
+end)
+
+-- Setting grafik
+settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
