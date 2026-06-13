@@ -267,6 +267,8 @@ setreadonly(mt, true)
 
 print("[MythicalViewer] UI aktif — buka inventory lu sekarang!")
 
+-- =====================================================================================
+
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local dataFolder = LocalPlayer:WaitForChild("Data", 15)
