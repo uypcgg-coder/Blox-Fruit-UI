@@ -156,9 +156,13 @@ local mythicalData = {
     {name = "Shadow",   short = "SHDW",  key = "Shadow-Shadow"},
     {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
     {name = "Mammoth",  short = "MMTH",  key = "Mammoth-Mammoth"},
-    {name = "Skull Guitar",  short = "SG",  key = "Skull Guitar"},
+    {name = "Yeti",     short = "Yeti",  key = "Yeti-Yeti"},
+    {name = "Gravity",  short = "Grav",  key = "Gravity-Gravity"},
+    {name = "Buddha",   short = "Budh",  key = "Buddha-Buddha"},
+    {name = "Portal",   short = "Port",  key = "Portal-Portal"},
+    {name = "Skull Guitar",        short = "SG",  key = "Skull Guitar"},
     {name = "Cursed Dual Katana",  short = "CDK",  key = "Cursed Dual Katana"},
-    {name = "Hallow Scythe",  short = "HS",  key = "Hallow Scythe"},
+    {name = "Hallow Scythe",       short = "HS",  key = "Hallow Scythe"},
 }
 
 local mythicalSet = {}
@@ -270,7 +274,7 @@ setreadonly(mt, true)
 
 print("[MythicalViewer] UI aktif — buka inventory lu sekarang!")
 
--- =====================================================================================
+-- =========================================================================
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
