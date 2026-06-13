@@ -337,8 +337,8 @@ task.spawn(function()
         end
     end
 end)
-
 time.sleep(10)
+
 local StarterGui = game:GetService("StarterGui")
 
 -- Langsung matikan UI
