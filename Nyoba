@@ -145,18 +145,20 @@ listPadding.Parent = listFrame
 
 -- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  short = "Leopard",  key = "Leopard-Leopard"},
-    {name = "Dragon",   short = "Dragon",  key = "Dragon-Dragon"},
-    {name = "Kitsune",  short = "Kitsune",  key = "Kitsune-Kitsune"},
+    {name = "Leopard",  short = "LEO",  key = "Leopard-Leopard"},
+    {name = "Dragon",   short = "DRGN",  key = "Dragon-Dragon"},
+    {name = "Kitsune",  short = "KIT",  key = "Kitsune-Kitsune"},
     {name = "Dough",    short = "Dough",  key = "Dough-Dough"},
     {name = "T-Rex",    short = "T-Rex",  key = "T-Rex-T-Rex"},
     {name = "Spirit",   short = "Spirit",  key = "Spirit-Spirit"},
     {name = "Venom",    short = "Venom",  key = "Venom-Venom"},
-    {name = "Control",  short = "Control",  key = "Control-Control"},
-    {name = "Shadow",   short = "Shadow",  key = "Shadow-Shadow"},
-    {name = "Gas",      short = "Gas",  key = "Gas-Gas"},
-    {name = "Mammoth",  short = "Mammoth",  key = "Mammoth-Mammoth"},
-    {name = "Skull Guitar",  short = "Skull Guitar",  key = "Skull Guitar"},
+    {name = "Control",  short = "CNTRL",  key = "Control-Control"},
+    {name = "Shadow",   short = "SHDW",  key = "Shadow-Shadow"},
+    {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
+    {name = "Mammoth",  short = "MMTH",  key = "Mammoth-Mammoth"},
+    {name = "Skull Guitar",  short = "SG",  key = "Skull Guitar"},
+    {name = "Cursed Dual Katana",  short = "CDK",  key = "Cursed Dual Katana"},
+    {name = "Hallow Scythe",  short = "HS",  key = "Hallow Scythe"},
 }
 
 local mythicalSet = {}
