@@ -156,6 +156,7 @@ local mythicalData = {
     {name = "Shadow",   short = "Shadow",  key = "Shadow-Shadow"},
     {name = "Gas",      short = "Gas",  key = "Gas-Gas"},
     {name = "Mammoth",  short = "Mammoth",  key = "Mammoth-Mammoth"},
+    {name = "Skull Guitar",  short = "Skull Guitar",  key = "Skull Guitar"},
 }
 
 local mythicalSet = {}
