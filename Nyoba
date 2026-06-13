@@ -145,17 +145,17 @@ listPadding.Parent = listFrame
 
 -- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  short = "LEO",  key = "Leopard-Leopard"},
-    {name = "Dragon",   short = "DRG",  key = "Dragon-Dragon"},
-    {name = "Kitsune",  short = "KIT",  key = "Kitsune-Kitsune"},
-    {name = "Dough",    short = "DGH",  key = "Dough-Dough"},
-    {name = "T-Rex",    short = "TRX",  key = "T-Rex-T-Rex"},
-    {name = "Spirit",   short = "SPR",  key = "Spirit-Spirit"},
-    {name = "Venom",    short = "VNM",  key = "Venom-Venom"},
-    {name = "Control",  short = "CTR",  key = "Control-Control"},
-    {name = "Shadow",   short = "SHD",  key = "Shadow-Shadow"},
-    {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
-    {name = "Mammoth",  short = "MMT",  key = "Mammoth-Mammoth"},
+    {name = "Leopard",  short = "Leopard",  key = "Leopard-Leopard"},
+    {name = "Dragon",   short = "Dragon",  key = "Dragon-Dragon"},
+    {name = "Kitsune",  short = "Kitsune",  key = "Kitsune-Kitsune"},
+    {name = "Dough",    short = "Dough",  key = "Dough-Dough"},
+    {name = "T-Rex",    short = "T-Rex",  key = "T-Rex-T-Rex"},
+    {name = "Spirit",   short = "Spirit",  key = "Spirit-Spirit"},
+    {name = "Venom",    short = "Venom",  key = "Venom-Venom"},
+    {name = "Control",  short = "Control",  key = "Control-Control"},
+    {name = "Shadow",   short = "Shadow",  key = "Shadow-Shadow"},
+    {name = "Gas",      short = "Gas",  key = "Gas-Gas"},
+    {name = "Mammoth",  short = "Mammoth",  key = "Mammoth-Mammoth"},
 }
 
 local mythicalSet = {}
