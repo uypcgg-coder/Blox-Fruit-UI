@@ -146,7 +146,7 @@ listPadding.Parent = listFrame
 
 -- ===== DATA =====
 local mythicalData = {
-    {name = "Leopard",  short = "LEO",  key = "Leopard-Leopard"},
+    {name = "Tiger",  short = "Tiger",  key = "Tiger-Tiger"},
     {name = "Dragon",   short = "DRGN",  key = "Dragon-Dragon"},
     {name = "Kitsune",  short = "KIT",  key = "Kitsune-Kitsune"},
     {name = "Dough",    short = "Dough",  key = "Dough-Dough"},
