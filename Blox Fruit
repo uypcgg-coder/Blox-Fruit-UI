@@ -157,7 +157,7 @@ local mythicalData = {
     {name = "Gas",      short = "GAS",  key = "Gas-Gas"},
     {name = "Mammoth",  short = "MMTH",  key = "Mammoth-Mammoth"},
     {name = "Yeti",     short = "Yeti",  key = "Yeti-Yeti"},
-    {name = "Gravity",  short = "Grav",  key = "Gravity-Gravity"},
+    {name = "Gravity",  short = "Gravity",  key = "Gravity-Gravity"},
     {name = "Buddha",   short = "Budh",  key = "Buddha-Buddha"},
     {name = "Portal",   short = "Port",  key = "Portal-Portal"},
     {name = "Skull Guitar",        short = "SG",  key = "Skull Guitar"},
