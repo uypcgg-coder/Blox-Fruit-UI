@@ -1,4 +1,3 @@
-task.wait(5)
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
@@ -74,7 +73,7 @@ countBadge.Parent = header
 local closeBtn = Instance.new("TextButton")
 closeBtn.Size = UDim2.new(0, 28, 0, 28)
 closeBtn.Position = UDim2.new(1, -46, 0.5, -14)
-closeBtn.Text = "✕"
+closeBtn.Text = "X"
 closeBtn.TextColor3 = Color3.fromRGB(120, 120, 130)
 closeBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
 closeBtn.Font = Enum.Font.GothamBold
@@ -203,7 +202,7 @@ local function createCard(d)
     shortLabel.TextTransparency = 0.15
     shortLabel.BackgroundTransparency = 1
     shortLabel.Font = Enum.Font.GothamBold
-    shortLabel.TextSize = 80  -- gede banget
+    shortLabel.TextSize = 70  -- gede banget
     shortLabel.Parent = card
 
     local nameLabel = Instance.new("TextLabel")
